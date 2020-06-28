@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meters</title>
+</head>
+<body>
+    <h1>Meters</h1>
+    <a href="{% url 'data_upload' %}">Upload more</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Building</th>
+            <th>Fuel</th>
+            <th>Unit</th>
+        </tr>
+        {% for meter in meters %}
+            <tr>
+                <td>{{meter.id}}</td>
+                <td><a href="{% url 'buildings_detail' meter.building_id %}">{{meter.building_id}}</a></td>
+                <td>{{meter.fuel_name}}</td>
+                <td>{{meter.unit_name}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buildings</title>
+</head>
+<body>
+    <h1>Buildings</h1>
+    <a href="{% url 'data_upload' %}">Upload more</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        {% for building in buildings %}
+            <tr>
+                <td>{{building.id}}</td>
+                <td>{{building.name}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

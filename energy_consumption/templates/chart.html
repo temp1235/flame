@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Water Usage</title>
+</head>
+<body>
+    <h1>Water Usage</h1>
+    <div id="container" style="width: 75%;">
+        <canvas id="water-chart" data-url="{% url 'water_chart' %}"></canvas>
+    </div>
+    <div>
+        <a href="{% url 'data_upload' %}">Upload data here</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+
+        $(function () {
+
+        var $populationChart = $("#water-chart");
+        $.ajax({
+            url: $populationChart.data("url"),
+            success: function (data) {
+                var ctx = $populationChart[0].getContext("2d");
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: data.datasets
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Water Usage per day for each building'
+                        },
+                        scales: {
+                            yAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Water usage (m3)'
+                                }
+                            }],
+                            xAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Date'
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        });
+
+        });
+
+    </script>
+</body>
+</html>

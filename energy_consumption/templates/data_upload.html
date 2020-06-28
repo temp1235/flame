@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Upload</title>
+</head>
+<body>
+    <h1>Energy Consumption Data Upload</h1>
+    <div>
+        <a href="{% url 'index' %}">Water Usage Visualisation</a>
+    </div>
+    <br />
+    {% for uploader in uploaders %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="{{uploader.id}}"> Upload {{uploader.type}} data with columns: {{uploader.columns}}</label>
+            <br />
+            <a href="{% url uploader.view %}">See all {{uploader.type}} objects</a>
+            <br />
+            <input type="file" id="{{uploader.id}}" name="{{uploader.file_name}}">
+            <small>{{uploader.warning}} Only accepts CSV files</small>
+            <button type="submit" name="{{uploader.file_name}}">Upload {{uploader.type}}s</button>
+            <div>
+                <strong>{{uploader.result}}</strong>
+            </div>
+            <br />
+        </form>
+    {% endfor %}
+</body>
+</html>

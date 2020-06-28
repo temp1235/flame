@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meter Readings</title>
+</head>
+<body>
+    <h1>Meter Readings</h1>
+    <a href="{% url 'data_upload' %}">Upload more</a>
+    <table>
+        <tr>
+            <th>Consumption</th>
+            <th>Meter</th>
+            <th>Date Time</th>
+        </tr>
+        {% for reading in meter_readings %}
+            <tr>
+                <td>{{reading.value}}</td>
+                <td><a href="{% url 'meters_detail' reading.meter_id %}">{{reading.meter_id}}</a></td>
+                <td>{{reading.date_time}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
